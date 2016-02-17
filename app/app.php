@@ -8,7 +8,7 @@
 
     session_start();
     if(empty($_SESSION['player_stats'])) {
-        $_SESSION['player_stats'] = array();
+        $_SESSION['player_stats'] = array(1);
     }
 
     $app = new Silex\Application();

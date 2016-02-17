@@ -5,7 +5,7 @@
     require_once 'src/Scissors.php';
     session_start();
     if(empty($_SESSION['player_stats'])) {
-        $_SESSION['player_stats'] = array();
+        $_SESSION['player_stats'] = array(1);
     }
 
     class GameTest extends PHPUnit_Framework_TestCase {
@@ -73,9 +73,84 @@
             $this->assertEquals([4, 5, 3], $result);
 
         }
+
+        function test_New_Turn() {
+            $rock = new Rock();
+            $paper = new Paper();
+            $scissors = new Scissors();
+
+            //Arrange;
+            $player1 = new Player('Marika', 25, $rock);
+            $player2 = new Player('Jason', 26, $paper);
+            $player1->save();
+            $player2->save();
+
+            //Act;
+
+            $result = $_SESSION['player_stats'][0];
+
+
+            //Assert;
+            $this->assertEquals(1, $result);
+
+        }
+
+        function test_Next_turn() {
+            $rock = new Rock();
+            $paper = new Paper();
+            $scissors = new Scissors();
+
+            //Arrange;
+            $player1 = new Player('Marika', 25, $rock);
+            $player2 = new Player('Jason', 26, $paper);
+            $player1->save();
+            $player2->save();
+
+            //Act;
+            Player::turnCount();
+            $result = $_SESSION['player_stats'][0];
+
+            //Assert;
+            $this->assertEquals(2, $result);
+
+        }
+
+
+        function test_Choose_Player() {
+            $rock = new Rock();
+            $paper = new Paper();
+            $scissors = new Scissors();
+
+            //Arrange;
+            $player1 = new Player('Marika', 25, $rock);
+            $player2 = new Player('Jason', 26, $paper);
+            $player1->save();
+            $player2->save();
+
+            //Act;
+            $result = Player::choosePlayer();
+
+            //Assert;
+            $this->assertEquals($player1, $result);
+        }
+
+        function test_Choose_Player2() {
+            $rock = new Rock();
+            $paper = new Paper();
+            $scissors = new Scissors();
+
+            //Arrange;
+            $player1 = new Player('Marika', 25, $rock);
+            $player2 = new Player('Jason', 26, $paper);
+            $player1->save();
+            $player2->save();
+
+            //Act;
+            Player::turnCount();
+            $result = Player::choosePlayer();
+
+            //Assert;
+            $this->assertEquals($player2, $result);
+        }
     }
-
-
-
-
  ?>
