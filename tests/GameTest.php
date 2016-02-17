@@ -5,7 +5,7 @@
     require_once 'src/Scissors.php';
     session_start();
     if(empty($_SESSION['player_stats'])) {
-        $_SESSION['player_stats'] = array(1);
+        $_SESSION['player_stats'] = array(2);
     }
 
     class GameTest extends PHPUnit_Framework_TestCase {
@@ -73,84 +73,97 @@
             $this->assertEquals([4, 5, 3], $result);
 
         }
+        //
+        // function test_Player_One_Attacks() {
+        //     //Arrange
+        //     $rock = new Rock();
+        //     $paper = new Paper();
+        //     $scissors = new Scissors();
+        //     $player1 = new Player('Marika', 25, $rock);
+        //     $player2 = new Player('Jason', 25, $paper);
+        //     $player1->save();
+        //     $player2->save();
+        //     //Act
+        //     $result = $player1->attack();
+        //     //Assert
+        //     $this->assertEquals("You miss!", $result);
+        // }
+        //
+        // function test_Player_Two_Attacks() {
+        //     //Arrange
+        //     $rock = new Rock();
+        //     $paper = new Paper();
+        //     $scissors = new Scissors();
+        //     $player1 = new Player('Marika', 25, $rock);
+        //     $player2 = new Player('Jason', 25, $paper);
+        //     $player1->save();
+        //     $player2->save();
+        //     //Act
+        //     $_SESSION['player_stats'][0] += 1;
+        //     $result = $player2->attack();
+        //     //Assert
+        //     $this->assertEquals("You miss!", $result);
+        // }
 
-        function test_New_Turn() {
+        // function test_Player_One_Heal() {
+        //     //Arrange
+        //     $rock = new Rock();
+        //     $player1 = new Player('Marika', 25, $rock);
+        //     $player1->save();
+        //     //Act
+        //
+        //     $result = $player1->heal();
+        //     //Assert
+        //     $this->assertEquals("You healed 3 hp!", $result);
+        // }
+        //
+        // function test_Player_Two_Heal() {
+        //     //Arrange
+        //     $rock = new Rock();
+        //     $paper = new Paper();
+        //     $scissors = new Scissors();
+        //     $player1 = new Player('Marika', 25, $rock);
+        //     $player2 = new Player('Jason', 25, $paper);
+        //     $player1->save();
+        //     $player2->save();
+        //     //Act
+        //     $_SESSION['player_stats'][0] += 1;
+        //     $result = $player2->heal();
+        //     //Assert
+        //     $this->assertEquals("You healed 3 hp!", $result);
+        // }
+
+        function test_Player_Two_Turn() {
+            //Arrange
             $rock = new Rock();
             $paper = new Paper();
             $scissors = new Scissors();
-
-            //Arrange;
             $player1 = new Player('Marika', 25, $rock);
-            $player2 = new Player('Jason', 26, $paper);
+            $player2 = new Player('Jason', 25, $paper);
             $player1->save();
             $player2->save();
+            //Act
+            $result = Player::playerTurn();
 
-            //Act;
-
-            $result = $_SESSION['player_stats'][0];
-
-
-            //Assert;
-            $this->assertEquals(1, $result);
-
+            //Assert
+            $this->assertEquals("It's Jason's turn", $result);
         }
 
-        function test_Next_turn() {
+        function test_Player_One_Turn() {
+            //Arrange
             $rock = new Rock();
             $paper = new Paper();
             $scissors = new Scissors();
-
-            //Arrange;
             $player1 = new Player('Marika', 25, $rock);
-            $player2 = new Player('Jason', 26, $paper);
+            $player2 = new Player('Jason', 25, $paper);
             $player1->save();
             $player2->save();
+            //Act
+            $_SESSION['player_stats'][0] += 1;
+            $result = Player::playerTurn();
 
-            //Act;
-            Player::turnCount();
-            $result = $_SESSION['player_stats'][0];
-
-            //Assert;
-            $this->assertEquals(2, $result);
-
-        }
-
-
-        function test_Choose_Player() {
-            $rock = new Rock();
-            $paper = new Paper();
-            $scissors = new Scissors();
-
-            //Arrange;
-            $player1 = new Player('Marika', 25, $rock);
-            $player2 = new Player('Jason', 26, $paper);
-            $player1->save();
-            $player2->save();
-
-            //Act;
-            $result = Player::choosePlayer();
-
-            //Assert;
-            $this->assertEquals($player1, $result);
-        }
-
-        function test_Choose_Player2() {
-            $rock = new Rock();
-            $paper = new Paper();
-            $scissors = new Scissors();
-
-            //Arrange;
-            $player1 = new Player('Marika', 25, $rock);
-            $player2 = new Player('Jason', 26, $paper);
-            $player1->save();
-            $player2->save();
-
-            //Act;
-            Player::turnCount();
-            $result = Player::choosePlayer();
-
-            //Assert;
-            $this->assertEquals($player2, $result);
+            //Assert
+            $this->assertEquals("It's Marika's turn", $result);
         }
     }
  ?>

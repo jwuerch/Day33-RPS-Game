@@ -2,9 +2,54 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles.css" media="all">
         <title>Make A Game</title>
     </head>
     <body>
+        <div class="container">
+            <h1>Rock, Paper, Scissors!</h1>
+            <p>
+                Choose wisely!
+            </p>
 
+
+            <form action="/play" method="post">
+                <div class="form-group">
+                    <label for="p1name">Player1 name: </label>
+                    <input type="text" name="p1name" value="">
+                </div>
+                <div class="form-group">
+                    <label for="p1age">Player 1 age: </label>
+                    <input type="number" name="p1age" value="">
+                </div>
+                <div class="form-group">
+                    <label for="p1weapon">Player 1 weapon: </label>
+                    <select name="p1weapon">
+                        <option value="rock">Rock</option>
+                        <option value="paper">Paper</option>
+                        <option value="scissors">Scissors</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="p2name">Player2 name: </label>
+                    <input type="text" name="p2name" value="">
+                </div>
+                <div class="form-group">
+                    <label for="p2age">Player 2 age: </label>
+                    <input type="number" name="p2age" value="">
+                </div>
+                <div class="form-group">
+                    <label for="p2weapon">Player 2 weapon: </label>
+                    <select name="p2weapon">
+                        <option value="rock">Rock</option>
+                        <option value="paper">Paper</option>
+                        <option value="scissors">Scissors</option>
+                    </select>
+                </div>
+                <button type="submit" name="button">Go!</button>
+            </form>
+        </div>
     </body>
 </html>
