@@ -40,20 +40,33 @@
 
             //Play function;
 
-            static function playerTurn() {
+            static function whoseTurn() {
                 if ($_SESSION['player_stats'][0] % 2 == 0) { //player2
-                    return "It's " . $_SESSION['player_stats'][2]->getName() . "'s turn";
+                    return $_SESSION['player_stats'][2]->getName();
                 } else { //player1
-                    return "It's " . $_SESSION['player_stats'][1]->getName() . "'s turn";
-
+                    return $_SESSION['player_stats'][1]->getName();
                 }
             }
-            
-            public function attack() {
+
+            static function changeTurn() {
                 $_SESSION['player_stats'][0] += 1;
+            }
+
+            static function decidePlayer() {
+                if ($_SESSION['player_stats'][0] % 2 == 0) { //player2
+                    return $_SESSION['player_stats'][2];
+                } else { //player1
+                    return $_SESSION['player_stats'][1];
+                }
+            }
+
+            static function attack() {
+                Player::changeTurn(); //determines whose turn it is
                 if ($_SESSION['player_stats'][0] % 2 == 0) { //player2's turn
                     $player = $_SESSION['player_stats'][2];
                     $opponent = $_SESSION['player_stats'][1];
+
+
                     $weapon = $player->getWeapon();
                     $accuracy = $weapon->getAccuracy();
                     $strength = $weapon->getStrength();
@@ -61,58 +74,68 @@
 
                     //opponent stats;
                     $opponent_weapon = $opponent->getWeapon();
+
                     $opponent_accuracy = $opponent_weapon->getAccuracy();
                     $opponent_strength = $opponent_weapon->getStrength();
                     $opponent_life = $opponent_weapon->getLife();
+                    return $opponent_life = 0;
                     $damage = ($strength / 2);
                     $roll = rand(1, 6);
-
+                    //
                     $accuracy += $roll;
+                    //
+                    // if ($accuracy >= 6) { //to hit;
+                    //     $opponent_weapon->getLife() = 0;
+                    //     if ($opponent_life < 1) {
+                    //         return "bye";
+                    //     }
+                    //     return $accuracy.' '.$opponent_life;
+                    // }
+                    //     // if ($opponent_life <= 0 ) { //if player1 life
+                    //     //     return "They're dead!  You win!";
+                    //     // }
+                        // return "A hit!  Opponent takes " . $damage . " damage.";
+                    // } else { //miss;
+                    //     return "You miss!";
+                    // }
 
-                    if ($accuracy >=6) { //to hit;
-                        $opponent_life -= $damage;
-                        if ($life <= 0 ) { //if player1 life
-                            return "They're dead!  You win!";
-                        }
-                        return "A hit!  Opponent takes " . $damage . " damage.";
-                    } else { //miss;
-                        return "You miss!";
-                    }
+                // } else { //player1's turn
+                //     $player = $_SESSION['player_stats'][1];
+                //     $opponent = $_SESSION['player_stats'][2];
 
-                } else { //player1's turn
-                    $player = $_SESSION['player_stats'][1];
-                    $opponent = $_SESSION['player_stats'][2];
-                    $weapon = $player->getWeapon();
-                    $accuracy = $weapon->getAccuracy();
-                    $strength = $weapon->getStrength();
-                    $life = $weapon->getLife();
-
-                    //opponent stats;
-                    $opponent_weapon = $opponent->getWeapon();
-                    $opponent_accuracy = $opponent_weapon->getAccuracy();
-                    $opponent_strength = $opponent_weapon->getStrength();
-                    $opponent_life = $opponent_weapon->getLife();
-                    $damage = ($strength / 2);
-
-                    $roll = rand(1, 6);
-
-                    $accuracy += $roll;
-
-                    if ($accuracy >=6) { //to hit;
-                        $opponent_life -= $damage;
-                        if ($life <= 0 ) { //if player1 life
-                            return "They're dead!  You win!";
-                        }
-                        return "A hit!  Opponent takes " . $damage  . " damage. " . $opponent_life . " hp remaining.";
-                    } else { //miss;
-                        return "You miss! " . $opponent_life . " hp remaining.";
-                    }
+                    // $weapon = $player->getWeapon();
+                    // $accuracy = $weapon->getAccuracy();
+                    // $strength = $weapon->getStrength();
+                    // $life = $weapon->getLife();
+                    //
+                    // //opponent stats;
+                    // $opponent_weapon = $opponent->getWeapon();
+                    // $opponent_accuracy = $opponent_weapon->getAccuracy();
+                    // $opponent_strength = $opponent_weapon->getStrength();
+                    // $opponent_life = $opponent_weapon->getLife();
+                    // $damage = ($strength / 2);
+                    //
+                    // $roll = rand(1, 6);
+                    //
+                    // $accuracy += $roll;
+                    //
+                    // if ($accuracy >=6) { //to hit;
+                    //     $opponent_life -= $damage;
+                    //     if ($life <= 0 ) { //if player1 life
+                    //         return "They're dead!  You win!";
+                    //     }
+                    //     return "A hit!  Opponent takes " . $damage  . " damage. " . $opponent_life . " hp remaining.";
+                    // } else { //miss;
+                    //     return "You miss! " . $opponent_life . " hp remaining.";
+                    // }
                 }
             }
 
+
+
             //Heal function?!?
 
-            function heal(){
+            public function heal(){
                 $_SESSION['player_stats'][0] += 1;
                 if ($_SESSION['player_stats'][0] % 2 == 0) { //player2
                     $player = $_SESSION['player_stats'][2];
@@ -135,8 +158,19 @@
 
             //SESSION STUFF;
             function save() {
+                $new_stats =
                 array_push($_SESSION['player_stats'], $this);
             }
+
+            function updateLife() {
+                $player = Player::whoseTurn();
+                $life = $player->getLife();
+                //replace session's player life with updated player life
+                return $_SESSION['player_stats']
+
+
+            }
+
 
             static function deleteAll() {
                 $_SESSION['player_stats'] = [];

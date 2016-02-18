@@ -9,11 +9,52 @@
     <body>
         <div class="container">
             <h1>Play the game!</h1>
-            
+            <div class="row">
+                <div class="col-xs-6">
+                    <!--display player1 information  -->
 
-            <p>
-                It's {{ player1.getName }}'s turn.
-            </p>
+                    <h3>Player 1: </h3>
+                    <pre>
+                    Name: {{ player1.getName }}
+                    Age: {{ player1.getAge }}
+                    Weapon: {{ player1.getWeapon.getName }}
+                    Strength: {{ player1.getWeapon.getStrength }}
+                    Accuracy: {{ player1.getWeapon.getAccuracy }}
+                    HP: {{ player1.getWeapon.getLife }}
+                    Damage {{ damage }}
+                </pre>
+                </div>
+                <div class="col-xs-6">
+                    <!-- display player2 information -->
+                    <h3>Player 2: </h3>
+                    <pre>
+                    Name: {{ player2.getName }}
+                    Age: {{ player2.getAge }}
+                    Weapon: {{ player2.getWeapon.getName }}
+                    Strength: {{ player2.getWeapon.getStrength }}
+                    Accuracy: {{ player2.getWeapon.getAccuracy }}
+                    HP: {{ player2.getWeapon.getLife }}
+
+                    Damage {{ damage }}
+
+                    Attack {{ attack }}
+                    </pre>
+                </div>
+            </div>
+
+
+            <p>{{ turn }}.</p>
+
+            <form action="/attack" method="post">
+                <button type="submit" class="btn btn-success">Attack</button>
+            </form>
+            <form action="/heal" method="post">
+                <button type="submit" class="btn btn-primary">Heal</button>
+            </form>
+            <form action="/delete" method="post">
+                <button type="submit" class="btn btn-danger">New Game</button>
+            </form>
         </div>
+
     </body>
 </html>

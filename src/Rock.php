@@ -4,11 +4,13 @@ class Rock
         private $strength;
         private $accuracy;
         private $life;
+        private $name;
 
-        public function __construct($strength = 6, $accuracy = 2, $life = 4) {
+        public function __construct($strength = 6, $accuracy = 2, $life = 4, $name = "Rock") {
             $this->strength = $strength;
             $this->accuracy = $accuracy;
             $this->life = $life;
+            $this->name = $name;
         }
 
         //setters;
@@ -21,6 +23,9 @@ class Rock
         public function setLife($new_life) {
             $this->life = $new_life;
         }
+        public function setName($new_name) {
+            $this->name = $new_name;
+        }
 
         //getters;
         public function getStrength() {
@@ -31,6 +36,9 @@ class Rock
         }
         public function getLife() {
             return $this->life;
+        }
+        public function getName() {
+            return $this->name;
         }
     }
 

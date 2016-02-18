@@ -1,0 +1,15 @@
+if ($_POST['p1weapon'] == "rock") {
+  $player1 = new Player($_POST['p1name'], $_POST['p1age'], $rock);
+} else if ($_POST['p1weapon'] == "paper") {
+  $player1 = new Player($_POST['p1name'], $_POST['p1age'], $paper);
+} else if ($_POST['p1weapon'] == "scissors") {
+  $player1 = new Player($_POST['p1name'], $_POST['p1age'], $scissors);
+}
+
+if ($_POST['p2weapon'] == "rock") {
+  $player2 = new Player($_POST['p2name'], $_POST['p2age'], $rock);
+} else if ($_POST['p2weapon'] == "paper") {
+  $player2 = new Player($_POST['p2name'], $_POST['p2age'], $paper);
+} else if ($_POST['p2weapon'] == "scissors") {
+  $player2 = new Player($_POST['p2name'], $_POST['p2age'], $scissors);
+}
