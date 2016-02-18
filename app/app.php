@@ -10,14 +10,7 @@
     if(empty($_SESSION['player_stats'])) {
         $_SESSION['player_stats'] = array(2);
     }
-    session_start();
-    if(empty($_SESSION['player1_stats'])) {
-        $_SESSION['player1_stats'] = array($_SESSION['player_stats'][1]);
-    }
-    session_start();
-    if(empty($_SESSION['player2_stats'])) {
-        $_SESSION['player2_stats'] = array($_SESSION['player_stats'][2]);
-    }
+
 
     $app = new Silex\Application();
 
